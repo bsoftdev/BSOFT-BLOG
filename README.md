@@ -1,4 +1,4 @@
-# Blog
+# A BLOG DEVELOPED BY BSOFT-TECH 
 Benfica Neighborhood Blog News
 
 Welcome to the official blog news site for the Benfica neighborhood! This platform is dedicated to providing the latest news, events, and stories happening in and around our community.
