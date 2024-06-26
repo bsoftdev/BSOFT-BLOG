@@ -1,4 +1,4 @@
-
+<?php if(!class_exists('Rain\Tpl')){exit;}?>
 
 
 <div class="modal modal-sheet position-static d-block bg-body-secondary p-4 mt-4  py-md-5" tabindex="-1" role="dialog" id="modalSignin">
@@ -11,11 +11,11 @@
 
       <div class="modal-body p-5 pt-0"> 
 
-        {if="$loginError != '' "}
+        <?php if( $loginError != ''  ){ ?>
             <div class="alert alert-danger">
-                    {$loginError}
+                    <?php echo htmlspecialchars( $loginError, ENT_COMPAT, 'UTF-8', FALSE ); ?>
              </div>
-          {/if}
+          <?php } ?>
 
         <form class="" action="/login" method="post">
 

@@ -14,23 +14,25 @@
                     <h5>Newsletter</h5>
                     <form>
                         <div class="mb-3">
-                            <label for="newsletterEmail" class="form-label">Email</label>
+                            <label for="newsletterEmail" class="form-label fom">Email</label>
                             <input type="email" class="form-control" id="newsletterEmail" placeholder="Seu email">
+                              <button type="submit" class="btn btn-primary">Assinar</button>
                         </div>
-                        <button type="submit" class="btn btn-primary">Assinar</button>
+                      
                     </form>
                 </div>
                 <div class="col-md-4">
                     <h5>Contato</h5>
                     <ul class="list-unstyled">
-                        <li>Email: contato@meusite.com</li>
-                        <li>Telefone: (XX) XXXX-XXXX</li>
-                        <li>Endereço: Rua Exemplo, 123</li>
+                        <li>  <i class="bi bi-envelope-fill"></i> Email: contato@meusite.com</li>
+                        <li> <i class="bi bi-telephone-fill"></i> Telefone: (XX) XXXX-XXXX</li>
+                        <li> <i class="bi bi-geo-alt-fill"></i> Endereço: Rua Exemplo, 123</li>
                     </ul>
                 </div>
             </div>
         </div>
     </footer>
+    
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>

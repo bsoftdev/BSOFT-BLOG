@@ -1,6 +1,7 @@
 <?php 
 
 use \Hcode\Page;
+use \Hcode\Model\User;
 
 
 $app->get('/', function() {
@@ -10,7 +11,35 @@ $app->get('/', function() {
 
 });
 
+#LOGIN ROUTE PAGE
+$app->get('/login', function() {
 
+  
+	  $page = new Page();
+	  $page->setTpl("login",[
+
+	  		 "loginError" =>User::getError()
+	  ]);
+
+});
+
+
+
+$app->post("/login", function(){
+
+	try {
+
+	    User::login($_POST["phone"], $_POST['password']);
+		
+	} catch (Exception $e) {
+		User::setError($e->getMessage());
+	}
+	header("Location: /index");
+	exit;
+
+
+
+});
 
 
 $app->get("/signup", function(){
