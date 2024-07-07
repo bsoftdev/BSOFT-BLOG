@@ -7,7 +7,7 @@
 
         <div class="btn-toolbar mb-2 mb-md-0">
           <div class="btn-group me-2">
-             <a href="/admin/users/create" class="btn btn-primary btn-sm"> <i class="bi bi-person-fill"></i>Cadastrar Usuario</a>
+             <a href="/admin/users/create" class="btn btn-primary btn-sm"> <i class="bi bi-person-fill-add"></i>Cadastrar Usuario</a>
           </div>
           <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle d-flex align-items-center gap-1">
             <svg class="bi"><use xlink:href="#calendar3"/></svg>

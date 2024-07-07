@@ -1,0 +1,49 @@
+<?php if(!class_exists('Rain\Tpl')){exit;}?> <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+      <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1 class="h2">Editar Categoria</h1>
+        <div class="btn-toolbar mb-2 mb-md-0">
+          <div class="btn-group me-2">
+           <a href="/admin/categories"  class="btn btn-sm btn-primary"> Categorias</a>
+            
+          </div>
+          <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle d-flex align-items-center gap-1">
+            <svg class="bi"><use xlink:href="#calendar3"/></svg>
+            This week
+          </button>
+        </div>
+      </div>
+
+    
+
+  <div>
+
+    <form class="mx-auto my-5" style="max-width: 700px;" action ="/admin/categories/create" method="POST">
+       
+       <?php if( $categoryError != ''  ){ ?>
+      <div class="alert alert-danger">
+              <?php echo htmlspecialchars( $categoryError, ENT_COMPAT, 'UTF-8', FALSE ); ?>
+       </div>
+      <?php } ?>
+   
+    <h1 class="h3 mb-3 fw-normal"></h1>
+
+    <input type="number" name="idcategory" value="<?php echo htmlspecialchars( $category["idcategory"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" style="visibility: hidden;">
+
+    <div class="form-floating mb-3">
+
+      <input type="text" class="form-control" name="category" id="floatingInput" value="<?php echo htmlspecialchars( $category["category"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" placeholder="name@example.com">
+      <label for="floatingInput"><i class="bi bi-tags-fill"></i> Nome da categoria</label>
+    </div>
+
+    <button class="btn btn-primary  py-2" type="submit"> <i class="bi bi-send-fill"></i>Atualizar</button>
+    
+    
+  </form>
+  </div>
+     
+
+
+
+    </main>
+  </div>
+</div>

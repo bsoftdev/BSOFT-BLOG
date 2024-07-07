@@ -88,7 +88,7 @@
             SELECT * 
             FROM users a 
             INNER JOIN  profiles b USING(iduser)
-            WHERE a.email = :LOGIN", array(
+            WHERE a.email = :LOGIN OR a.phone =:LOGIN", array(
 
             ":LOGIN" =>$login
          ));

@@ -41,14 +41,11 @@
           <button class="w-100 mb-2 btn btn-lg rounded-3 btn-primary" type="submit">Criar Conta</button>
                     <hr class="my-2">
 
-          <small class="text-body-secondary">Já tem uma conta? <strong> <a href="login.html">Fazer Login</a></small> <br>
+          <small class="text-body-secondary">Já tem uma conta? <a href="login.html">Fazer Login</a></small> <br>
 
-          <span class="text-body-normal">Ao  <strong> "Criar conta"</strong> você concorda com nossos termos de uso.</span>
+          <span class="text-body-normal">Ao "Criar conta"você concorda com nossos termos de uso.</span>
 
-          <h2 class="fs-5 fw-bold mb-3"></h2>
-
-         
-          
+          <h2 class="fs-5  mb-3"></h2>
         </form>
       </div>
     </div>

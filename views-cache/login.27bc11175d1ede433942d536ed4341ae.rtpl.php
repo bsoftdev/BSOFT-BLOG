@@ -24,14 +24,14 @@
 
           <div class="form-floating mb-3">
             <input type="tel" class="form-control rounded-3" name="phone" id="floatingInput" placeholder="name@example.com">
-            <label for="floatingInput">Número de telefone</label>
+            <label for="floatingInput"> <i class="bi bi-person-fill"></i>E-mail ou nº de telefone</label>
           </div>
           <div class="form-floating mb-3">
             <input type="password" class="form-control rounded-3" name="password" id="floatingPassword" placeholder="Password">
-            <label for="floatingPassword">Palavra-passe</label>
+            <label for="floatingPassword"> <i class="bi bi-lock-fill"></i>Palavra-passe</label>
           </div>
           <button class="w-100 mb-2 btn btn-lg rounded-3 btn-primary" type="submit">Entrar</button>
-          <small class="text-body-secondary">Ainda não tem uma conta? <strong> <a href="signup.html">Criar conta</a></small> 
+          <small class="text-body-secondary">Ainda não tem uma conta?  <a href="signup.html">Criar conta</a></small> 
          
           <hr class="my-3">
           <h2 class="fs-5 fw-bold mb-3"></h2>

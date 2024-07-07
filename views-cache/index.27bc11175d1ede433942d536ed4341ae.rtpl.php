@@ -8,9 +8,9 @@
             <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
         </div>
         <div class="carousel-inner">
-            <div class="carousel-item active" > <img src="assets/slide1.png"></div>
-            <div class="carousel-item" > <img src="assets/slide2.png"></div>
-            <div class="carousel-item"><img src="assets/slide3.png"></div>
+            <div class="carousel-item active" > <img class="img-responsive" src="assets/slide1.png"></div>
+            <div class="carousel-item" > <img  class="img-responsive" src="assets/slide2.png"></div>
+            <div class="carousel-item"><img class="img-responsive" src="assets/slide3.png"></div>
         </div>
         <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -23,16 +23,16 @@
     </div>
 
     <!-- Conteúdo Principal -->
-    <main>
-    <div class="container content">
+    <main class=" ">
+    <div class="container-fluid content border-bottom">
         <div class="row">
             <!-- Artigos Recentes -->
-            <div class="col-md-8">
+            <div class="col-md-9">
                 <h2>Posts em Destaque</h2>
                 <div class="row">
 
                    
-                    <div class="col-md-6 article-card">
+                    <div class="col-md-4 article-card">
                         <div class="card">
                             <img src="assets/photo1.jpg" class="card-img-top" alt="Artigo 2">
                             <div class="card-body">
@@ -45,7 +45,7 @@
                     </div>
 
 
-                     <div class="col-md-6 article-card">
+                     <div class="col-md-4 article-card">
                         <div class="card">
                             <img src="assets/photo1.jpg" class="card-img-top" alt="Artigo 2">
                             <div class="card-body">
@@ -58,7 +58,7 @@
                     </div>
 
 
-                     <div class="col-md-6 article-card">
+                     <div class="col-md-4 article-card">
                         <div class="card">
                             <img src="assets/photo1.jpg" class="card-img-top" alt="Artigo 2">
                             <div class="card-body">
@@ -72,7 +72,7 @@
 
 
 
-                     <div class="col-md-6 article-card">
+                     <div class="col-md-4 article-card">
                         <div class="card">
                             <img src="assets/photo1.jpg" class="card-img-top" alt="Artigo 2">
                             <div class="card-body">
@@ -85,7 +85,7 @@
                     </div>
 
 
-                     <div class="col-md-6 article-card">
+                     <div class="col-md-4 article-card">
                         <div class="card">
                             <img src="assets/photo1.jpg" class="card-img-top" alt="Artigo 2">
                             <div class="card-body">
@@ -98,7 +98,7 @@
                     </div>
 
 
-                     <div class="col-md-6 article-card">
+                     <div class="col-md-4 article-card">
                         <div class="card">
                             <img src="assets/photo1.jpg" class="card-img-top" alt="Artigo 2">
                             <div class="card-body">
@@ -116,7 +116,7 @@
             </div>
 
             <!-- Posts Recentes -->
-            <div class="col-md-4">
+            <div class="col-md-3">
                 <div class="fixed-sidebar">
                     <h3>Posts Recentes</h3>
                      <ul class="list-unstyled">

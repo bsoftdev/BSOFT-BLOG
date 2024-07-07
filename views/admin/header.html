@@ -19,6 +19,9 @@
     <link href="/resource/admin/assets/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <style>
+      body{
+        overflow-x: hidden;
+      }
       .bd-placeholder-img {
         font-size: 1.125rem;
         text-anchor: middle;
@@ -259,13 +262,15 @@
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link d-flex align-items-center gap-2" href="#">
-                 <i class="bi bi-journal-album"></i>
+              <a class="nav-link d-flex align-items-center gap-2" href="/admin/posts">
+                 <i class="bi bi-newspaper"></i>
                 Posts
               </a>
             </li>
+
+            
             <li class="nav-item">
-              <a class="nav-link d-flex align-items-center gap-2" href="#">
+              <a class="nav-link d-flex align-items-center gap-2" href="/admin/categories">
                  <i class="bi bi-tags"></i>
                  Categorias
               </a>
@@ -287,8 +292,8 @@
             </li>
             <li class="nav-item">
               <a class="nav-link d-flex align-items-center gap-2" href="#">
-                <i class="bi bi-person-lines-fill"></i>
-               Perfil
+                <i class="bi bi-person-circle"></i>
+               Perfil ({function="getUserName()"})
               </a>
             </li>
           
@@ -303,12 +308,14 @@
                 Definições
               </a>
             </li>
+
             <li class="nav-item">
               <a class="nav-link d-flex align-items-center gap-2" href="/admin/logout">
                 <svg class="bi"><use xlink:href="#door-closed"/></svg>
                 Logout
               </a>
             </li>
+
           </ul>
         </div>
       </div>

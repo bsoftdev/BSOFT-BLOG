@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <script src="/resource/admin/assets/js/color-modes.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Site de Publicações</title>
+    <title>BSOFT NEWS</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     
@@ -311,15 +311,15 @@
         <form class="" action="/admin/login" method="post">
 
           <div class="form-floating mb-3">
-            <input type="email" class="form-control rounded-3" name="email" id="floatingInput" placeholder="name@example.com">
-            <label for="floatingInput"> <i class="bi bi-person-fill"></i> E-mail</label>
+            <input type="text" class="form-control rounded-3" name="email" id="floatingInput" placeholder="name@example.com">
+            <label for="floatingInput"> <i class="bi bi-person-fill"></i> E-mail ou nº de telefone</label>
           </div>
           <div class="form-floating mb-3">
             <input type="password" class="form-control rounded-3" name="senha" id="floatingPassword" placeholder="Password">
             <label for="floatingPassword"><i class="bi bi-lock-fill"></i> Palavra-passe</label>
           </div>
           <button class="w-100 mb-2 btn btn-lg rounded-3 btn-primary" type="submit">Entrar</button>
-          <small class="text-body-secondary">Esqueci minha senhas? <strong> <a href="signup.html">Recuperar</a></small> 
+          <small class="text-body-secondary">Esqueci minha senhas? <a href="signup.html">Recuperar</a></small> 
          
           <hr class="my-4">
          
@@ -331,44 +331,71 @@
 </div>
 
 
-
- <footer class="footer">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-4">
-                    <h5>Links Importantes</h5>
-                    <ul class="list-unstyled">
-                        <li><a href="#">Privacidade</a></li>
-                        <li><a href="#">Termos de Uso</a></li>
-                        <li><a href="#">Ajuda</a></li>
-                    </ul>
-                </div>
-                <div class="col-md-4">
-                    <h5>Newsletter</h5>
-                    <form>
-                        <div class="mb-3">
-                            <label for="newsletterEmail" class="form-label fom">Email</label>
-                            <input type="email" class="form-control" id="newsletterEmail" placeholder="Seu email">
-                              <button type="submit" class="btn btn-primary">Assinar</button>
-                        </div>
-                      
-                    </form>
-                </div>
-                <div class="col-md-4">
-                    <h5>Contato</h5>
-                    <ul class="list-unstyled">
-                        <li>  <i class="bi bi-envelope-fill"></i> Email: contato@meusite.com</li>
-                        <li> <i class="bi bi-telephone-fill"></i> Telefone: (XX) XXXX-XXXX</li>
-                        <li> <i class="bi bi-geo-alt-fill"></i> Endereço: Rua Exemplo, 123</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </footer>
+<div class="container border-top">
+  <footer class="py-5">
+    <div class="row">
 
 
 
-<script src="../resource/admin/assets/dist/js/bootstrap.bundle.min.js"></script>
+      <div class="col-6 col-md-2 mb-3">
+        <h4>Link Uteis</h4>
+
+        <ul class="nav flex-column">
+          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Privacidade</a></li>
+          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Termo de Uso</a></li>
+          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Ajuda</a></li>
+          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">FAQs</a></li>
+          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">About</a></li>
+        </ul>
+      </div>
+
+      
+
+      <div class="col-6 col-md-3 mb-3">
+        <h4>Contactos</h4>
+
+        <ul class="nav flex-column">
+          <li class="nav-item mb-2"> <a href="#" class="nav-link p-0 text-body-secondary"> <i class="bi bi-telephone-fill"></i> (+244) 932314957 </a></li>
+          <li class="nav-item mb-2"><i class="bi bi-envelope-fill"></i> bsoft411@gmail.com </a></li>
+          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary"><i class="bi bi-geo-alt-fill"></i>Luanda, Benfica, Mundial </a></a></li>
+
+          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary"><i class="bi bi-house-fill"></i>Casa Nº 12, Rua Praça Nova </a></a></li>
+          
+        </ul>
+      </div>
+
+
+    
+       
+
+      
+
+      <div class="col-md-4  mb-3">
+        <form>
+          <h4>Subscribe to our newsletter</h4>
+          <p>Monthly digest of what's new and exciting from us.</p>
+          <div class="d-flex flex-column flex-sm-row w-100 gap-2">
+            <label for="newsletter1" class="visually-hidden">Email address</label>
+            <input id="newsletter1" type="text" class="form-control" placeholder="Email address">
+            <button class="btn btn-primary" type="button">Subscribe</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div class="d-flex flex-column flex-sm-row justify-content-between py-4 my-4 border-top">
+      <p>&copy; 2024 Company, Inc. All rights reserved.</p>
+      <ul class="list-unstyled d-flex">
+        <li class="ms-3"><a class="link-body-emphasis" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#twitter"/></svg></a></li>
+        <li class="ms-3"><a class="link-body-emphasis" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#instagram"/></svg></a></li>
+        <li class="ms-3"><a class="link-body-emphasis" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#facebook"/></svg></a></li>
+      </ul>
+    </div>
+  </footer>
+</div>
+ 
+
+
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
   </body>
