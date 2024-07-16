@@ -29,139 +29,107 @@
             <!-- Artigos Recentes -->
             <div class="col-md-9">
                 <h2>Posts em Destaque</h2>
-                <div class="row">
+                <div class="row justify-content-center">
 
-                   
+                 
+
+                   {loop="$featured"}
                     <div class="col-md-4 article-card">
                         <div class="card">
                             <img src="assets/photo1.jpg" class="card-img-top" alt="Artigo 2">
                             <div class="card-body">
-                                <h5 class="card-title">Título do Artigo 2</h5>
-                                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                                tempor incididunt ut labore et dolore magna aliqua.2...</p>
-                                <a href="single_post.html" class="btn btn-primary w-100">Leia mais</a>
+                               <h5 class="card-title text-uppercase text-justify w-100" style="font-size: 12pt; font-weight: bolder;">{$value.title}</h5>
+                                  
+                                 Data:  <span style="color: blue">{function="formatDate($value.dtregister)"}</span> <br>
+                               
+
+                                <p class="card-text border-top">{function="limitText($value.content)"}</p>
+                                <a href="/posts/{$value.url}" class="btn btn-primary w-100">Leia mais</a>
                             </div>
+
+
                         </div>
                     </div>
+                    {/loop}
 
 
-                     <div class="col-md-4 article-card">
-                        <div class="card">
-                            <img src="assets/photo1.jpg" class="card-img-top" alt="Artigo 2">
-                            <div class="card-body">
-                                <h5 class="card-title">Título do Artigo 2</h5>
-                                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                                tempor incididunt ut labore et dolore magna aliqua.2...</p>
-                                <a href="single_post.html" class="btn btn-primary w-100">Leia mais</a>
+                   <video loop  autoplay style="object-fit: cover; width: 100%;" class="my-4">
+                        <source src="assets/blogvideo.mp4" type="">
+                    </video>
+
+
+                        <!-------MODAL FOR REGISTERING--->
+                     
+                    <!-----------------------------------MODAL FOR LOGING------------------------>
+                         <div class="modal fade" id="modalLogin" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+
+                          <div class="modal-dialog">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="exampleModalLabel">Login</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                              </div>
+
+                              <div class="modal-body">
+                                <form method="post" action="/login">
+                                  <div class="mb-3">
+                                     <div class="form-floating mb-3">
+                                        <input type="tel" class="form-control rounded-3" name="phone" id="floatingInput" placeholder="name@example.com">
+                                        <label for="floatingInput"> <i class="bi bi-person-fill"></i>E-mail ou nº de telefone</label>
+                                      </div>
+                                  </div>
+                                  <div class="mb-3">
+                                    
+                                    <div class="form-floating mb-3">
+                                    <input type="password" class="form-control rounded-3" name="password" id="floatingPassword" placeholder="Password">
+                                    <label for="floatingPassword"> <i class="bi bi-lock-fill"></i>Palavra-passe</label>
+                                  </div>
+
+                                  </div>
+
+
+                              <div class="modal-footer">
+                               
+                                <button class="w-100 mb-2 btn btn-lg rounded-3 btn-primary" type="submit">Entrar</button>
+                                 <small class="text-body-secondary">Ainda não tem uma conta?  <a href="signup.html" data-bs-toggle="modal" data-bs-target="#modalRegiter">Criar conta</a></small> 
+                              </div>
+                                </form>
+                              </div>
+                             
                             </div>
-                        </div>
-                    </div>
+                          </div>
+                        </div>    
 
 
-                     <div class="col-md-4 article-card">
-                        <div class="card">
-                            <img src="assets/photo1.jpg" class="card-img-top" alt="Artigo 2">
-                            <div class="card-body">
-                                <h5 class="card-title">Título do Artigo 2</h5>
-                                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                                tempor incididunt ut labore et dolore magna aliqua.2...</p>
-                                <a href="single_post.html" class="btn btn-primary w-100">Leia mais</a>
-                            </div>
-                        </div>
-                    </div>
-
-
-
-                     <div class="col-md-4 article-card">
-                        <div class="card">
-                            <img src="assets/photo1.jpg" class="card-img-top" alt="Artigo 2">
-                            <div class="card-body">
-                                <h5 class="card-title">Título do Artigo 2</h5>
-                                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                                tempor incididunt ut labore et dolore magna aliqua.2...</p>
-                                <a href="single_post.html" class="btn btn-primary w-100">Leia mais</a>
-                            </div>
-                        </div>
-                    </div>
-
-
-                     <div class="col-md-4 article-card">
-                        <div class="card">
-                            <img src="assets/photo1.jpg" class="card-img-top" alt="Artigo 2">
-                            <div class="card-body">
-                                <h5 class="card-title">Título do Artigo 2</h5>
-                                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                                tempor incididunt ut labore et dolore magna aliqua.2...</p>
-                                <a href="single_post.html" class="btn btn-primary w-100">Leia mais</a>
-                            </div>
-                        </div> 
-                    </div>
-
-
-                     <div class="col-md-4 article-card">
-                        <div class="card">
-                            <img src="assets/photo1.jpg" class="card-img-top" alt="Artigo 2">
-                            <div class="card-body">
-                                <h5 class="card-title">Título do Artigo 2</h5>
-                                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                                tempor incididunt ut labore et dolore magna aliqua.2...</p>
-                                <a href="single_post.html" class="btn btn-primary w-100">Leia mais</a>
-                            </div>
-                        </div>
-                    </div>
-
-
-                   
+                       
+      
+        <!-- Testimonial End -->  
                 </div>
             </div>
 
-            <!-- Posts Recentes -->
+
+
+
+            <!----------------- Posts Recentes ----------------------->
             <div class="col-md-3">
                 <div class="fixed-sidebar">
                     <h3>Posts Recentes</h3>
                      <ul class="list-unstyled">
+
+                    {loop="$posts"}
                         <li>
-                          <a class="d-flex flex-column flex-lg-row gap-3 align-items-start align-items-lg-center py-3 link-body-emphasis text-decoration-none border-top" href="#">
+                          <a class="d-flex flex-column flex-lg-row gap-3 align-items-start align-items-lg-center py-3 link-body-emphasis text-decoration-none border-top" href="/posts/{$value.url}">
                            <img src="assets/cleep.jpg" style="width: 100px; height: 100px;">
                             <div class="col-lg-8">
-                              <h6 class="mb-0">Example blog post title</h6>
-                              <small class="text-body-secondary">January 15, 2024</small>
+                              <h6 class="mb-0">{$value.title}</h6>
+                              <small class="text-body-secondary">{function="formatDate($value.dtregister)"}</small>
                             </div>
                           </a>
                         </li>
 
-
-                        <li>
-                          <a class="d-flex flex-column flex-lg-row gap-3 align-items-start align-items-lg-center py-3 link-body-emphasis text-decoration-none border-top" href="#">
-                           <img src="assets/two.jpg" style="width: 100px; height: 100px;">
-                            <div class="col-lg-8">
-                              <h6 class="mb-0">This is another blog post title</h6>
-                              <small class="text-body-secondary">January 14, 2024</small>
-                            </div>
-                          </a>
-                        </li>
-
-
-                          <li>
-                          <a class="d-flex flex-column flex-lg-row gap-3 align-items-start align-items-lg-center py-3 link-body-emphasis text-decoration-none border-top" href="#">
-                           <img src="assets/design.jpeg" style="width: 100px; height: 100px;">
-                            <div class="col-lg-8">
-                              <h6 class="mb-0">This is another blog post title</h6>
-                              <small class="text-body-secondary">January 14, 2024</small>
-                            </div>
-                          </a>
-                        </li>
-
-            
-                        <li>
-                          <a class="d-flex flex-column flex-lg-row gap-3 align-items-start align-items-lg-center py-3 link-body-emphasis text-decoration-none border-top" href="#">
-                           <img src="assets/cleep.jpg" style="width: 100px; height: 100px;">
-                            <div class="col-lg-8">
-                              <h6 class="mb-0">Longer blog post title: This one has multiple lines!</h6>
-                              <small class="text-body-secondary">January 13, 2024</small>
-                            </div>
-                          </a>
-                        </li>
+                  {/loop}
+                
                       </ul>
                 </div>
             </div>
@@ -169,4 +137,3 @@
     </div>
 </main>
 
-   

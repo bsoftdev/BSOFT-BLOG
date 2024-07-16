@@ -27,7 +27,7 @@
               <input type="file" class="form-control" id="file" name="photo" style="visibility: hidden;">
               <div class="box box-widget">
                 <div class="box-body">
-                  <img class="img-responsive rounded-circle" id="image-preview" src="" alt="Photo" width="300px" height="300px" style="object-fit: cover;">
+                  <img src="/assets/logo.png" class="img-responsive rounded-circle" id="image-preview" src="" alt="Photo" width="200px" height="200px" style="object-fit: cover;">
                 </div>
               </div>
                </label>

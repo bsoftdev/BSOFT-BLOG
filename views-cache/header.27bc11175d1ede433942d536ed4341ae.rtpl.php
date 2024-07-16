@@ -5,8 +5,10 @@
     <script src="/resource/admin/assets/js/color-modes.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BSOFT NEWS</title>
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
     
     <style>
         .carousel-item {
@@ -254,20 +256,23 @@
 
                     
                      <li class="nav-item">
-                        <a class="nav-link" href="/about">Sobre </a>
-                      </li>
-                      <li class="nav-item">
-                        <a class="nav-link" href="/signup">Criar Conta</a>
+                        <a class="nav-link"href="/about">Sobre </a>
                       </li>
 
+                      <?php if( hidenMenu()===true ){ ?>
+                        <li class="nav-item">
+                          <a class="nav-link" href="/signup">Criar Conta</a>
+                        </li>
+                  
                        <li class="nav-item">
-                        <a class="nav-link" href="/login">Entrar</a>
+                        <a class="nav-link"href="/login">Entrar</a>
                       </li>
+                        <?php } ?>
 
                       <?php if( checkLogin(false) ){ ?>
                       <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                          <?php echo getUserEmail(); ?>
+                          <?php echo getUserName(); ?>
                         </a>
                         <ul class="dropdown-menu">
                           <li><a class="dropdown-item" href="#">Olá, <?php echo getUserName(); ?></a></li>

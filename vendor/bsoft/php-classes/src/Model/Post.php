@@ -18,6 +18,21 @@
       }
 
 
+      public static function featured(){
+
+         $sql = new Sql();
+         return $sql->select("SELECT * FROM posts INNER JOIN users USING(iduser) ORDER BY idpost ASC LIMIT 3");
+
+      }
+
+      #RECENT POSTS
+       public static function recentPosts(){
+
+         $sql = new Sql();
+         return $sql->select("SELECT * FROM posts INNER JOIN users USING(iduser) ORDER BY idpost DESC LIMIT 4");
+
+      }
+
       #METHOD FOR CREATING CATEGORIES
       public function save(){
 
@@ -41,21 +56,41 @@
 
 
 
-      #GETTING THE DATA OF A SPECIFIC  CATEGORY
-     public function get($idcategory){
+      #GETTING THE DATA OF A SPECIFIC  ID POST
+     public function get($idpost){
 
         $sql = new Sql();
 
-        $results = $sql->select("SELECT * FROM categories WHERE idcategory =:idcategory", [
+        $results = $sql->select("SELECT * FROM posts WHERE idpost =:idpost", [
 
-            ":idcategory"=>$idcategory
+            ":idpost"=>$idpost
         ]);
       
        if (count($results) > 0) {
+
         $this->setData($results[0]);
        }
         
      }
+
+
+      #GETTING THE DATA OF A SPECIFIC  POST BY URL
+     public function getlink($url){
+
+        $sql = new Sql();
+
+        $results = $sql->select("SELECT * FROM posts INNER JOIN users USING(iduser) WHERE url =:url", [
+
+            ":url"=>$url
+        ]);
+      
+       if (count($results) > 0) {
+
+        $this->setData($results[0]);
+       }
+        
+     }
+
 
 
      #DELETING THE CATEGORY
@@ -63,9 +98,9 @@
 
         $sql = new Sql();
 
-        $sql->query("DELETE FROM categories WHERE idcategory =:idcategory", [
+        $sql->query("DELETE FROM posts WHERE idpost =:idpost", [
 
-            ":idcategory"=>$this->getidcategory()
+            ":idpost"=>$this->getidpost()
         ]);
 
       

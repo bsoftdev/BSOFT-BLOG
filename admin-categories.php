@@ -8,6 +8,7 @@ use \Hcode\Model\Category;
 
 
 $app->get("/admin/categories", function(){
+	
 		User::verifyLogin();
 
 		
@@ -20,6 +21,8 @@ $app->get("/admin/categories", function(){
 });
 #ROUTE TO CREATE CATEGORIE
 $app->get("/admin/categories/create", function(){
+
+    User::verifyLogin();
 
 	$page = new PageAdmin();
 	$page->setTpl("category-create",[
@@ -53,6 +56,9 @@ $app->post("/admin/categories/create", function(){
 
 
 $app->get("/admin/categories/:idcategory/delete", function($idcategory){
+	 
+	   User::verifyLogin();
+
 
 	   $category = new Category();
 	   $category->get((int)$idcategory);
@@ -64,6 +70,8 @@ $app->get("/admin/categories/:idcategory/delete", function($idcategory){
 
 #ROUTE TO TEMPLETE TO EDIT CATEGORIES
 $app->get("/admin/categories/:idcategory", function($idcategory){
+
+    User::verifyLogin();
 
 	$category = new Category();
 	$category->get((int)$idcategory);
@@ -78,6 +86,8 @@ $app->get("/admin/categories/:idcategory", function($idcategory){
 
 #ROUTE TO SAVE EDITED CATEGORIES
 $app->post("/admin/categories/:idcategory", function($idcategory){
+
+       User::verifyLogin();
 
 	   $category = new Category();
 	   $category->get((int)$idcategory);

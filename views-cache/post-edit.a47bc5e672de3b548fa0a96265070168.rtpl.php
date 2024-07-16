@@ -1,6 +1,6 @@
- <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 mb-3">
+<?php if(!class_exists('Rain\Tpl')){exit;}?> <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 mb-3">
       <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <h1 class="h2">Nova Publicação</h1>
+        <h1 class="h2">Editar Publicação</h1>
         <div class="btn-toolbar mb-2 mb-md-0">
           <div class="btn-group me-2">
            <a href="/admin/posts" class="text-white text-decoration-none">  <button class="btn btn-sm btn-primary"> <i class="bi bi-newspaper"></i>  Publicações</button></a>
@@ -18,8 +18,10 @@
   <div>
     
     <link rel="stylesheet" type="text/css" href="/assets/summernote/summernote-lite.min.css">
-    <form class="mx-auto" style="" action ="/admin/post/create" method="POST" enctype="multipart/form-data">
+    <form class="mx-auto" style="" action ="/admin/post/<?php echo htmlspecialchars( $post["idpost"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" method="POST" enctype="multipart/form-data">
       
+         <input type="hidden" name="idpost" value="<?php echo htmlspecialchars( $post["idpost"], ENT_COMPAT, 'UTF-8', FALSE ); ?>">
+
 
         <div class="text-center" >
         <div class="form-group">
@@ -27,7 +29,7 @@
               <input type="file" class="form-control" id="file" name="photo" style="visibility: hidden;">
               <div class="box box-widget">
                 <div class="box-body">
-                  <img src="/assets/logo.png" class="img-responsive rounded-circle" id="image-preview" src="" alt="Photo" width="200px" height="200px" style="object-fit: cover;">
+                  <img src="/assets/logo.png" class="img-responsive rounded-circle border border-primary" id="image-preview" src="" alt="Photo" width="250px" height="250px" style="object-fit: cover;">
                 </div>
               </div>
                </label>
@@ -35,35 +37,35 @@
      </div>
  
 
-      {if="$postError != '' "}
+      <?php if( $postError != ''  ){ ?>
       <div class="alert alert-danger">
-              {$postError}
+              <?php echo htmlspecialchars( $postError, ENT_COMPAT, 'UTF-8', FALSE ); ?>
        </div>
-      {/if}
+      <?php } ?>
 
 
    
     <h1 class="h3 mb-3 fw-normal"></h1>
 
     <div class="form-floating mb-3">
-      <input type="text" class="form-control" name="title" id="floatingInput" placeholder="name@example.com">
+      <input type="text" class="form-control" name="title" id="floatingInput" placeholder="name@example.com" value="<?php echo htmlspecialchars( $post["title"], ENT_COMPAT, 'UTF-8', FALSE ); ?>">
       <label for="floatingInput">Titulo</label>
     </div>
 
     <div class="form-floating mb-3">
 
-      <textarea class="summernote" name="content" class="w-100"></textarea>
-   
+      <textarea class="summernote" name="content" class="w-100" value=""><?php echo htmlspecialchars( $post["content"], ENT_COMPAT, 'UTF-8', FALSE ); ?></textarea>
+
     </div>
 
     <div class="form-floating mb-3">
-      <input type="text" class="form-control" name="url" id="floatingInput" placeholder="name@example.com">
+      <input type="text" class="form-control" name="url" id="floatingInput" placeholder="name@example.com"  value="<?php echo htmlspecialchars( $post["url"], ENT_COMPAT, 'UTF-8', FALSE ); ?>">
       <label for="floatingInput">URL</label>
     </div>
 
 
    
-    <button class="btn btn-primary  py-2" type="submit"> <i class="bi bi-send-fill"></i>Publicar</button>
+    <button class="btn btn-primary  py-2" type="submit"> <i class="bi bi-send-fill"></i>Atualizar</button>
     <a href="/admin/posts" class=" btn btn-success "> <i class="bi bi-newspaper"></i> Publicações</a>
     
   </form>

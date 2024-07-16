@@ -5,17 +5,11 @@ use \Hcode\Model\User;
 use \Hcode\Model\Category;
 
 
-
-
-
 $app->get("/admin", function(){
 	User::verifyLogin();
 	$page = new PageAdmin();
 
-
-
 });
-
 
 #LOGIN ROUTE PAGE
 $app->get('/admin/login', function() {
@@ -32,8 +26,6 @@ $app->get('/admin/login', function() {
 	  ]);
 
 });
-
-
  
 $app->post('/admin/login', function(){
 
@@ -47,8 +39,6 @@ $app->post('/admin/login', function(){
 	}
 	header("Location: /admin");
 	exit;
-
-
 
 });
 $app->get("/admin/logout", function() {

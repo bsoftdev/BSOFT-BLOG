@@ -7,9 +7,10 @@ use \Hcode\Model\Category;
 use \Hcode\Model\Post;
 
 
-
-
+#POST DASPLAY
 $app->get("/admin/posts", function(){
+
+   User::verifyLogin();
 
 	$page = new PageAdmin();
 	$page->setTpl("posts",[
@@ -18,8 +19,10 @@ $app->get("/admin/posts", function(){
 	]);
 });
 
+#CREATING POST TEMPLATE
 $app->get("/admin/post/create", function(){
-
+  
+   User::verifyLogin();
 
 	$page = new PageAdmin();
 	$page->setTpl("post-create",[
@@ -28,10 +31,42 @@ $app->get("/admin/post/create", function(){
 	]);
 });
 
+#EDITING POST TEMPLATE
+$app->get("/admin/post/:idpost", function($idpost){
 
+   User::verifyLogin();
+
+     $post = new Post();
+     $post->get((int)$idpost);
+
+    $page = new PageAdmin();
+    $page->setTpl("post-edit",[
+
+        "postError" => Post::getError(),
+        "post" => $post->getData()
+    ]);
+});
+
+
+$app->get("/admin/post/:idpost/delete", function($idpost){
+
+      User::verifyLogin();
+
+   $post = new Post();
+   $post->get((int)$idpost);
+   $post->delete();
+   header("Location:/admin/posts");
+   exit;
+
+
+});
+
+
+
+#ROUTE TO CREATE POST
 $app->post("/admin/post/create", function(){
 
-	
+	   User::verifyLogin();
 
    if (!isset($_POST['title']) || $_POST['title'] ==="") {
    	
@@ -62,7 +97,52 @@ $app->post("/admin/post/create", function(){
     $_POST['iduser'] = $user->getiduser();
     $post->setData($_POST);
     $post->save();
-    header("Location:/admin/post/create");
+    header("Location:/admin/posts");
+    exit;
+
+
+});
+
+
+#ROUTE TO SAVE DATA EDITED
+$app->post("/admin/post/:idpost", function($idpost){
+    
+   User::verifyLogin();
+
+     $post = new Post();
+     $post->get((int)$idpost);
+
+
+    if (!isset($_POST['title']) || $_POST['title'] ==="") {
+    
+     Post::setError("Escreva um Título para este post...");
+     header("Location:/admin/post/".$post->getidpost());
+     exit;
+   }
+
+    if (!isset($_POST['content']) || $_POST['content'] ==="") {
+    
+     Post::setError("Escreva o conteúdo do post...");
+     header("Location:/admin/post/".$post->getidpost());
+     exit;
+   }
+
+    if (!isset($_POST['url']) || $_POST['url'] ==="") {
+    
+     Post::setError("Escreva a url do post...");
+     header("Location:/admin/post/".$post->getidpost());
+     exit;
+   }
+
+
+    $user = User::getFromSession();
+
+    $post =  new Post();
+
+    $_POST['iduser'] = $user->getiduser();
+    $post->setData($_POST);
+    $post->save();
+    header("Location:/admin/posts");
     exit;
 
 
