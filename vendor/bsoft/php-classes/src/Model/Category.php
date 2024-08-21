@@ -4,6 +4,7 @@
 
    use \Hcode\DB\Sql;
    use \Hcode\Model;
+   
 
 
    class Category extends Model{
@@ -75,7 +76,7 @@
        $html = [];
 
        foreach($category as $cat) {
-          array_push($html, '<li class ="nav-item mb-2"><a class="nav-link p-0 text-body-secondary" href="/categories/'.$cat['idcategory'].'">'.$cat['category'].'</a></li>');
+          array_push($html, '<li class ="nav-item mb-2"><a class="nav-link p-0" href="/categories/'.$cat['idcategory'].'"> <i class="bi bi-chevron-right"></i>'.$cat['category'].'</a></li>');
        }
 
        file_put_contents($_SERVER['DOCUMENT_ROOT'].DIRECTORY_SEPARATOR."views".DIRECTORY_SEPARATOR."categories-menu.html", implode('',$html));
@@ -83,20 +84,19 @@
 
 
      #METHOD TO GET THE PRODUCTS RELATED TO A SPECIFIC CATEGORY, E THOSE THAT ARE NOT.
-     public function getProducts($related = true){
+     public function getPosts($related = true){
 
       $sql = new Sql();
 
       if ($related === true) {
 
            return $sql->select("
-                  SELECT * 
-                        FROM tb_products 
-                        WHERE idproduct IN(
-                        SELECT a.idproduct 
-                        FROM  tb_products a 
-                        INNER JOIN tb_productscategories b 
-                        ON a.idproduct = b.idproduct
+                  SELECT * FROM posts 
+                        WHERE idpost IN(
+                        SELECT a.idpost 
+                        FROM  posts a 
+                        INNER JOIN post_categories b 
+                        ON a.idpost = b.idpost
                         WHERE b.idcategory =:idcategory
                      );", [
                            ":idcategory"=>$this->getidcategory()
@@ -106,11 +106,11 @@
       }else{
 
          return $sql->select(" 
-                     SELECT * FROM tb_products WHERE idproduct NOT IN(
-                        SELECT a.idproduct 
-                        FROM tb_products a 
-                        INNER JOIN tb_productscategories b 
-                        ON a.idproduct = b.idproduct
+                     SELECT * FROM posts WHERE idpost NOT IN(
+                        SELECT a.idpost 
+                        FROM posts a 
+                        INNER JOIN post_categories b 
+                        ON a.idpost = b.idpost
                         WHERE b.idcategory =:idcategory
                         );",[
                            ":idcategory"=>$this->getidcategory()
@@ -120,36 +120,36 @@
      }
 
 
-     #METHOD TO RELATE A PRODUCT DO A CATEGORY
-     public function addProduct(Product $product){
+     #METHOD TO RELATE A POST DO A CATEGORY
+     public function addPost(Post $post){
 
       $sql = new Sql();
 
-      $sql->query("INSERT INTO tb_productscategories (idcategory, idproduct) VALUES (:idcategory, :idproduct)",[
+      $sql->query("INSERT INTO post_categories (idcategory, idpost) VALUES (:idcategory, :idpost)",[
 
           ":idcategory"=>$this->getidcategory(),
-          ":idproduct"=>$product->getidproduct()
+          ":idpost"=>$post->getidpost()
       ]);
 
 
      }
 
 
-     #METHOD TO REMOVE A PRODUCT RELATED TO A CATEGORY
-     public function removeProduct(Product $product){
+     #METHOD TO REMOVE A POST RELATED TO A CATEGORY
+     public function removePost(Post $post){
 
       $sql = new Sql();
-      $sql->query("DELETE FROM tb_productscategories WHERE idcategory =:idcategory AND idproduct =:idproduct", [
+      $sql->query("DELETE FROM post_categories WHERE idcategory =:idcategory AND idpost =:idpost", [
 
           ":idcategory"=>$this->getidcategory(),
-          ":idproduct"=>$product->getidproduct()
+          ":idpost"=>$post->getidpost()
       ]);
 
      }
      
 
  #METHOD FOR PRODUCTS PAGINATION
-public function getProductsPage($page = 1, $itemsPerPage = 8){
+public function getPostsPage($page = 1, $itemsPerPage = 8){
   
       $start = ($page - 1) * $itemsPerPage;
 
@@ -157,9 +157,9 @@ public function getProductsPage($page = 1, $itemsPerPage = 8){
 
      $results = $sql->select("
             SELECT  SQL_CALC_FOUND_ROWS * 
-            FROM tb_products a 
-            INNER JOIN tb_productscategories b ON a.idproduct = b.idproduct
-            INNER JOIN tb_categories c ON c.idcategory = b.idcategory
+            FROM posts a 
+            INNER JOIN post_categories b ON a.idpost = b.idpost
+            INNER JOIN categories c ON c.idcategory = b.idcategory
             WHERE b.idcategory =:idcategory
             LIMIT $start,$itemsPerPage;
 
@@ -173,7 +173,7 @@ public function getProductsPage($page = 1, $itemsPerPage = 8){
         $resultsTotal = $sql->select("SELECT FOUND_ROWS() AS nrtotal;");
 
         return [
-            "data" =>Product::checkList($results),
+            #"data" =>Post::checkList($results),
             "total"=>(int)$resultsTotal[0]["nrtotal"],
             "pages" =>ceil($resultsTotal[0]["nrtotal"] / $itemsPerPage)
 
@@ -191,8 +191,8 @@ public static function getPage($page = 1, $itemsPerPage = 10){
 
      $results = $sql->select("
             SELECT  SQL_CALC_FOUND_ROWS * 
-            FROM tb_categories 
-            ORDER BY descategory
+            FROM categories 
+            ORDER BY category
             LIMIT $start,$itemsPerPage;");
     
 
@@ -217,9 +217,9 @@ public static function getPageSearch($search, $page = 1, $itemsPerPage = 10){
 
      $results = $sql->select("
             SELECT  SQL_CALC_FOUND_ROWS * 
-            FROM tb_categories
-            WHERE descategory LIKE :search 
-            ORDER BY descategory
+            FROM categories
+            WHERE category LIKE :search 
+            ORDER BY category
             LIMIT $start,$itemsPerPage;", [
                 ':search'=>'%'.$search.'%'
             ]);

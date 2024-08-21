@@ -3,20 +3,20 @@
         <h1 class="h2">Posts</h1>
         <div class="btn-toolbar mb-2 mb-md-0">
           <div class="btn-group me-2">
-            <a href="/admin/post/create" class="text-white text-decoration-none"> <button class="btn btn-sm btn-primary"> <i class="bi bi-newspaper"></i>  Criar Post</button></a>
+            <a href="/admin/post/create" class="text-white text-decoration-none"> <button class="btn btn-sm btn-primary"> <i class="bi bi-newspaper"></i>  Criar Publicação</button></a>
            
           </div>
-          <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle d-flex align-items-center gap-1">
-            <svg class="bi"><use xlink:href="#calendar3"/></svg>
-            This week
-          </button>
+          <form class="d-flex" role="search" action="/admin/posts">
+            <input class="form-control me-2" name="search" type="search" placeholder="Pesquisar" aria-label="Search" autofocus value="<?php echo htmlspecialchars( $search, ENT_COMPAT, 'UTF-8', FALSE ); ?>">
+            <button class="btn btn-success" type="submit">Pesquisar</button>
+          </form>
         </div>
       </div>
 
     
 
      <!-- Conteúdo Principal -->
-    <main>
+
     <div class="container content">
         <div class="row">
             <!-- Artigos Recentes -->
@@ -56,7 +56,23 @@
             </div>
         </div>
     </div>
-</main>
+
+
+    <!-----PAGINATION--------->
+     <nav class="border-top my-2" aria-label="Page navigation example">
+      <ul class="pagination my-2 justify-content-center">
+        <li class="page-item disabled">
+          <a class="page-link">Anterior</a>
+        </li>
+       <?php $counter1=-1;  if( isset($pages) && ( is_array($pages) || $pages instanceof Traversable ) && sizeof($pages) ) foreach( $pages as $key1 => $value1 ){ $counter1++; ?>
+        <li class="page-item"><a class="page-link" href="<?php echo htmlspecialchars( $value1["href"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"><?php echo htmlspecialchars( $value1["text"], ENT_COMPAT, 'UTF-8', FALSE ); ?></a></li>
+       <?php } ?>
+        <li class="page-item">
+          <a class="page-link" href="#">Próximo</a>
+        </li>
+      </ul>
+    </nav>
+
 
     </main>
   </div>

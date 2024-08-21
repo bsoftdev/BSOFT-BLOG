@@ -14,9 +14,6 @@
       const ERROR_REGISTER = "fErrorRegister";
 
 
-
-
-
       #Getting the user on session
       public static function getFromSession(){
 
@@ -74,9 +71,7 @@
       }
 
 
-        
-     
-
+    
   
   #FUNCTION FOR LOGIN
     public static function login($login , $password){
@@ -363,7 +358,7 @@ public function checkPhoto(){
 
 
 #METHOD FOR USERS PAGINATION
-public static function getPage($page = 1, $itemsPerPage = 10){
+public static function getPage($page = 1, $itemsPerPage = 25){
   
       $start = ($page - 1) * $itemsPerPage;
 
@@ -371,9 +366,9 @@ public static function getPage($page = 1, $itemsPerPage = 10){
 
      $results = $sql->select("
             SELECT  SQL_CALC_FOUND_ROWS * 
-            FROM tb_users a
-            INNER JOIN tb_persons b USING(idperson) 
-            ORDER BY b.desperson
+            FROM users a
+            INNER JOIN profiles b USING(iduser) 
+            ORDER BY a.iduser DESC
             LIMIT $start,$itemsPerPage;");
     
 
@@ -398,10 +393,10 @@ public static function getPageSearch($search, $page = 1, $itemsPerPage = 10){
 
      $results = $sql->select("
             SELECT  SQL_CALC_FOUND_ROWS * 
-            FROM tb_users a
-            INNER JOIN tb_persons b USING(idperson) 
-            WHERE b.desperson LIKE :search OR b.desemail = :search OR a.deslogin LIKE :search OR a.dtregister LIKE :search
-            ORDER BY b.desperson
+            FROM users a
+            INNER JOIN profiles b USING(iduser) 
+            WHERE a.name LIKE :search OR a.email = :search OR a.phone LIKE :search OR a.inadmin LIKE :search
+            ORDER BY a.iduser DESC 
             LIMIT $start,$itemsPerPage;", [
                 ':search'=>'%'.$search.'%'
             ]);

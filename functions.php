@@ -80,3 +80,19 @@ function limitText($texto, $limite = 80) {
 
     return $textoTruncado;
 }
+
+function countWords($texto, $limite = 410) {
+    // Verifica se o texto é maior que o limite
+
+       $cleanText = ($texto);
+
+    if (mb_strlen($cleanText) > $limite) {
+        // Trunca o texto ao limite e adiciona "..."
+        $textoTruncado = mb_substr($cleanText, 0, $limite) . '...';
+    } else {
+        // Se o texto for menor ou igual ao limite, retorna o texto original
+        $textoTruncado = $cleanText;
+    }
+
+    return $textoTruncado;
+}

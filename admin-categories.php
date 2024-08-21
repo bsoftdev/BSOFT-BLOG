@@ -4,21 +4,46 @@
 use \Hcode\PageAdmin;
 use \Hcode\Model\User;
 use \Hcode\Model\Category;
+use \Hcode\Model\Post;
 
 
 
 $app->get("/admin/categories", function(){
 	
-		User::verifyLogin();
-
+	User::verifyLogin();
 		
-	  $page = new PageAdmin();
-	  $page->setTpl("categories",[
+    $search = (isset($_GET['search']))?$_GET['search']:"";
+    $page = (isset($_GET['page']))? (int)$_GET['page']:1;
 
-        "categories" => Category::listAll()
+    if ($search != '') {
 
-	  ]);
+        $pagination = Category::getPageSearch($search, $page);
+    }else{
+
+       $pagination = Category::getPage($page);
+    }
+     $pages = [];
+
+          for ($i=0; $i < $pagination['pages']; $i++){ 
+
+              array_push($pages, [
+                    'href'=>'/admin/categories?'.http_build_query([
+                        'page'=>$i+1,
+                        'search'=>$search
+                    ]),
+
+                    'text'=>$i+1
+              ]);
+          }
+    $page = new PageAdmin();
+    $page->setTpl("categories",[ 
+    	"categories"=>$pagination['data'],
+        "search"=>$search,
+        "pages"=>$pages
+    ]);
 });
+
+
 #ROUTE TO CREATE CATEGORIE
 $app->get("/admin/categories/create", function(){
 
@@ -30,6 +55,60 @@ $app->get("/admin/categories/create", function(){
 	]);
 
 });
+
+
+#ROUTE TO GET POSTS RELETED TO A CATEGORY --- TEMPLATE
+$app->get("/admin/categories/:idcategory/posts", function($idcategory){
+	User::verifyLogin();
+
+  
+  $category = new Category();
+  $category->get((int)$idcategory);
+
+
+  $page = new PageAdmin();
+  $page->setTpl("categories-posts",[
+
+  	  "category" =>$category->getData(),
+  	  "reletedPosts" => $category->getPosts(),
+  	  "noReletedPosts"=> $category->getPosts(false)
+  ]);
+
+
+});
+
+
+#ROUTE TO RELATE POST TO A CATEGORY
+$app->get("/admin/categories/:idcategory/post/:idpost/add", function($idcategory, $idpost){
+	User::verifyLogin();
+
+	   $category = new Category();
+	   $category->get((int)$idcategory);
+
+	   $post = new Post();
+	   $post->get((int)$idpost);
+	   $category->addPost($post);
+
+	   header("Location: /admin/categories/".$idcategory."/posts");
+	   exit;
+
+});
+
+   #ROUTE TO REMOVE POSTS RELATED TO A CATEGORY 
+$app->get("/admin/categories/:idcategory/post/:idpost/remove", function($idcategory, $idpost){
+	User::verifyLogin();  
+
+	$category = new Category();
+	$category->get((int)$idcategory);
+
+	$post = new Post();
+	$post->get((int)$idpost);
+	$category->removePost($post);
+	header("Location: /admin/categories/".$idcategory."/posts");
+    exit;
+});
+
+
 
 #ROUTE TO CREATE CATEGORIE
 $app->post("/admin/categories/create", function(){

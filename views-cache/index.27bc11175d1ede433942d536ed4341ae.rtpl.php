@@ -1,139 +1,197 @@
 <?php if(!class_exists('Rain\Tpl')){exit;}?>
 
     <!-- Slideshow -->
-    <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
-        <div class="carousel-indicators">
-            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
-        </div>
-        <div class="carousel-inner">
-            <div class="carousel-item active" > <img class="img-responsive" src="assets/slide1.png"></div>
-            <div class="carousel-item" > <img  class="img-responsive" src="assets/slide2.png"></div>
-            <div class="carousel-item"><img class="img-responsive" src="assets/slide3.png"></div>
-        </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-        </button>
-    </div>
-
+    
     <!-- Conteúdo Principal -->
-    <main class=" ">
-    <div class="container-fluid content border-bottom">
+    
+  <main id="main" class="my-5">
+
+    <!-- ======= Hero Slider Section ======= -->
+    <section id="hero-slider" class="hero-slider mb-0">
+      <div class="" data-aos="fade-in">
         <div class="row">
-            <!-- Artigos Recentes -->
-            <div class="col-md-9">
-                <h2>Posts em Destaque</h2>
-                <div class="row justify-content-center">
-
-                 
-
-                   <?php $counter1=-1;  if( isset($featured) && ( is_array($featured) || $featured instanceof Traversable ) && sizeof($featured) ) foreach( $featured as $key1 => $value1 ){ $counter1++; ?>
-                    <div class="col-md-4 article-card">
-                        <div class="card">
-                            <img src="assets/photo1.jpg" class="card-img-top" alt="Artigo 2">
-                            <div class="card-body">
-                               <h5 class="card-title text-uppercase text-justify w-100" style="font-size: 12pt; font-weight: bolder;"><?php echo htmlspecialchars( $value1["title"], ENT_COMPAT, 'UTF-8', FALSE ); ?></h5>
-                                  
-                                 Data:  <span style="color: blue"><?php echo formatDate($value1["dtregister"]); ?></span> <br>
-                               
-
-                                <p class="card-text border-top"><?php echo limitText($value1["content"]); ?></p>
-                                <a href="/posts/<?php echo htmlspecialchars( $value1["url"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" class="btn btn-primary w-100">Leia mais</a>
-                            </div>
-
-
-                        </div>
+          <div class="col-lg-12">
+            <div class="swiper sliderFeaturedPosts">
+              <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                  <a href="single-post.html" class="img-bg d-flex align-items-end" style="background-image: url('assets/img/post-slide-1.jpg');">
+                    <div class="img-bg-inner">
+                      <h2>The Best Homemade Masks for Face (keep the Pimples Away)</h2>
+                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem neque est mollitia! Beatae minima assumenda repellat harum vero, officiis ipsam magnam obcaecati cumque maxime inventore repudiandae quidem necessitatibus rem atque.</p>
                     </div>
-                    <?php } ?>
-
-
-                   <video loop  autoplay style="object-fit: cover; width: 100%;" class="my-4">
-                        <source src="assets/blogvideo.mp4" type="">
-                    </video>
-
-
-                        <!-------MODAL FOR REGISTERING--->
-                     
-                    <!-----------------------------------MODAL FOR LOGING------------------------>
-                         <div class="modal fade" id="modalLogin" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-
-
-                          <div class="modal-dialog">
-                            <div class="modal-content">
-                              <div class="modal-header">
-                                <h1 class="modal-title fs-5" id="exampleModalLabel">Login</h1>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                              </div>
-
-                              <div class="modal-body">
-                                <form method="post" action="/login">
-                                  <div class="mb-3">
-                                     <div class="form-floating mb-3">
-                                        <input type="tel" class="form-control rounded-3" name="phone" id="floatingInput" placeholder="name@example.com">
-                                        <label for="floatingInput"> <i class="bi bi-person-fill"></i>E-mail ou nº de telefone</label>
-                                      </div>
-                                  </div>
-                                  <div class="mb-3">
-                                    
-                                    <div class="form-floating mb-3">
-                                    <input type="password" class="form-control rounded-3" name="password" id="floatingPassword" placeholder="Password">
-                                    <label for="floatingPassword"> <i class="bi bi-lock-fill"></i>Palavra-passe</label>
-                                  </div>
-
-                                  </div>
-
-
-                              <div class="modal-footer">
-                               
-                                <button class="w-100 mb-2 btn btn-lg rounded-3 btn-primary" type="submit">Entrar</button>
-                                 <small class="text-body-secondary">Ainda não tem uma conta?  <a href="signup.html" data-bs-toggle="modal" data-bs-target="#modalRegiter">Criar conta</a></small> 
-                              </div>
-                                </form>
-                              </div>
-                             
-                            </div>
-                          </div>
-                        </div>    
-
-
-                       
-      
-        <!-- Testimonial End -->  
+                  </a>
                 </div>
-            </div>
 
-
-
-
-            <!----------------- Posts Recentes ----------------------->
-            <div class="col-md-3">
-                <div class="fixed-sidebar">
-                    <h3>Posts Recentes</h3>
-                     <ul class="list-unstyled">
-
-                    <?php $counter1=-1;  if( isset($posts) && ( is_array($posts) || $posts instanceof Traversable ) && sizeof($posts) ) foreach( $posts as $key1 => $value1 ){ $counter1++; ?>
-                        <li>
-                          <a class="d-flex flex-column flex-lg-row gap-3 align-items-start align-items-lg-center py-3 link-body-emphasis text-decoration-none border-top" href="/posts/<?php echo htmlspecialchars( $value1["url"], ENT_COMPAT, 'UTF-8', FALSE ); ?>">
-                           <img src="assets/cleep.jpg" style="width: 100px; height: 100px;">
-                            <div class="col-lg-8">
-                              <h6 class="mb-0"><?php echo htmlspecialchars( $value1["title"], ENT_COMPAT, 'UTF-8', FALSE ); ?></h6>
-                              <small class="text-body-secondary"><?php echo formatDate($value1["dtregister"]); ?></small>
-                            </div>
-                          </a>
-                        </li>
-
-                  <?php } ?>
-                
-                      </ul>
+                <div class="swiper-slide">
+                  <a href="single-post.html" class="img-bg d-flex align-items-end" style="background-image: url('assets/img/post-slide-2.jpg');">
+                    <div class="img-bg-inner">
+                      <h2>17 Pictures of Medium Length Hair in Layers That Will Inspire Your New Haircut</h2>
+                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem neque est mollitia! Beatae minima assumenda repellat harum vero, officiis ipsam magnam obcaecati cumque maxime inventore repudiandae quidem necessitatibus rem atque.</p>
+                    </div>
+                  </a>
                 </div>
+
+                <div class="swiper-slide">
+                  <a href="single-post.html" class="img-bg d-flex align-items-end" style="background-image: url('assets/img/post-slide-3.jpg');">
+                    <div class="img-bg-inner">
+                      <h2>13 Amazing Poems from Shel Silverstein with Valuable Life Lessons</h2>
+                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem neque est mollitia! Beatae minima assumenda repellat harum vero, officiis ipsam magnam obcaecati cumque maxime inventore repudiandae quidem necessitatibus rem atque.</p>
+                    </div>
+                  </a>
+                </div>
+
+                <div class="swiper-slide">
+                  <a href="single-post.html" class="img-bg d-flex align-items-end" style="background-image: url('assets/img/post-slide-4.jpg');">
+                    <div class="img-bg-inner">
+                      <h2>9 Half-up/half-down Hairstyles for Long and Medium Hair</h2>
+                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem neque est mollitia! Beatae minima assumenda repellat harum vero, officiis ipsam magnam obcaecati cumque maxime inventore repudiandae quidem necessitatibus rem atque.</p>
+                    </div>
+                  </a>
+                </div>
+              </div>
+              <div class="custom-swiper-button-next">
+                <span class="bi-chevron-right"></span>
+              </div>
+              <div class="custom-swiper-button-prev">
+                <span class="bi-chevron-left"></span>
+              </div>
+
+              <div class="swiper-pagination"></div>
             </div>
+          </div>
         </div>
-    </div>
-</main>
+      </div>
+    </section><!-- End Hero Slider Section -->
+
+   
+   
+  
+
+    <!-- ======= Lifestyle Category Section ======= -->
+    <section class="category-section">
+      <div class="container" data-aos="fade-up">
+
+        <div class="row g-5">
+          <div class="col-lg-4">
+            <div class="post-entry-1 lg">
+
+              <?php if( $asidePost !=''  ){ ?>
+              <a href="/posts/<?php echo htmlspecialchars( $asidePost["url"], ENT_COMPAT, 'UTF-8', FALSE ); ?>">
+                <img src="assets/img/post-landscape-8.jpg" alt="" class="img-fluid">
+              </a>
+
+              <div class="post-meta">
+                <span class="date">BSOFT</span>
+                <span class="mx-1">&bullet;</span>
+                <span><?php echo formatDate($asidePost["dtregister"]); ?></span>
+              </div>
+
+              <h2 class="text-uppercase">
+                <a href="single-post.html">
+                   <?php echo htmlspecialchars( $asidePost["title"], ENT_COMPAT, 'UTF-8', FALSE ); ?>
+                </a>
+              </h2>
+
+              <p class="mb-4 d-block" style="text-align: justify;">
+                <?php echo countWords($asidePost["content"]); ?>
+              </p>
+
+              <div class="d-flex align-items-center author">
+                <div class="photo">
+                  <img src="assets/img/person-7.jpg" alt="" class="img-fluid"></div>
+                <div class="name">
+                  <h3 class="m-0 p-0"><?php echo htmlspecialchars( $asidePost["name"], ENT_COMPAT, 'UTF-8', FALSE ); ?></h3>
+                </div>
+              </div>
+
+              <?php } ?>
+            </div>
+
+          
+          </div>
+
+          <div class="col-lg-8">
+            <div class="row g-5">
+              <div class="col-lg-4 border-start custom-border">
+               
+
+                <?php $counter1=-1;  if( isset($posts) && ( is_array($posts) || $posts instanceof Traversable ) && sizeof($posts) ) foreach( $posts as $key1 => $value1 ){ $counter1++; ?>
+                <div class="post-entry-1">
+                  <a href="/posts/<?php echo htmlspecialchars( $value1["url"], ENT_COMPAT, 'UTF-8', FALSE ); ?>">
+                    <img src="assets/img/post-landscape-5.jpg" alt="" class="img-fluid">
+                  </a>
+                  <div class="post-meta">
+
+                    <span class="date"> BSOFT</span> 
+                    <span class="mx-1">&bullet;</span>
+                     <span><?php echo formatDate($value1["dtregister"]); ?></span>
+                  </div>
+
+                  <h2>
+                    <a href="/posts/<?php echo htmlspecialchars( $value1["url"], ENT_COMPAT, 'UTF-8', FALSE ); ?>/<?php echo htmlspecialchars( $value1["idpost"], ENT_COMPAT, 'UTF-8', FALSE ); ?>">
+                      <?php echo htmlspecialchars( $value1["title"], ENT_COMPAT, 'UTF-8', FALSE ); ?>
+                    </a>
+                  </h2>
+                </div>
+                <?php } ?>
+
+                
+              </div>
+
+              <div class="col-lg-4 border-start custom-border">
+                
+               <?php $counter1=-1;  if( isset($recentPostsColum2) && ( is_array($recentPostsColum2) || $recentPostsColum2 instanceof Traversable ) && sizeof($recentPostsColum2) ) foreach( $recentPostsColum2 as $key1 => $value1 ){ $counter1++; ?>
+                <div class="post-entry-1">
+                  <a href="/posts/<?php echo htmlspecialchars( $value1["url"], ENT_COMPAT, 'UTF-8', FALSE ); ?>">
+                    <img src="assets/img/post-landscape-1.jpg" alt="" class="img-fluid">
+                  </a>
+                  <div class="post-meta">
+                    <span class="date">BSOFT</span> 
+                    <span class="mx-1">&bullet;</span> 
+                    <span><?php echo formatDate($value1["dtregister"]); ?></span></div>
+                  <h2><a href="single-post.html"><?php echo htmlspecialchars( $value1["title"], ENT_COMPAT, 'UTF-8', FALSE ); ?>
+                  </a>
+                </h2>
+                </div>
+                <?php } ?>
+              </div>
+
+              <div class="col-lg-4">
+
+                <?php $counter1=-1;  if( isset($featured) && ( is_array($featured) || $featured instanceof Traversable ) && sizeof($featured) ) foreach( $featured as $key1 => $value1 ){ $counter1++; ?>
+                <div class="post-entry-1 border-bottom">
+                  <div class="post-meta">
+
+                    <span class="date">BSOFT</span>
+                     <span class="mx-1">&bullet;</span> 
+                     <span><?php echo formatDate($value1["dtregister"]); ?></span>
+                   </div>
+
+                  <h2 class="mb-2"><a href="/posts/<?php echo htmlspecialchars( $value1["url"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"><?php echo limitText($value1["content"]); ?></a></h2>
+                  <span class="author mb-3 d-block"><?php echo htmlspecialchars( $value1["name"], ENT_COMPAT, 'UTF-8', FALSE ); ?></span>
+                </div>
+                <?php } ?>
+
+              </div>
+            </div>
+          </div>
+
+        </div> <!-- End .row -->
+      </div>
+    </section><!-- End Lifestyle Category Section -->
+
+
+     <!-- ======= Post Grid Section ======= -->
+    <section id="posts" class="posts mt-0 border-top">
+      <div class="container-fluid" data-aos="">
+        
+         <video autoplay loop style="object-fit: cover;" class="w-100">
+             <source src="/assets/blogvideo.mp4" type="">
+         </video>
+      </div>
+    </section> <!-- End Post Grid Section -->
+
+
+  </main><!-- End #main -->
+
 

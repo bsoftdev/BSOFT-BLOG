@@ -1,6 +1,7 @@
 <?php 
 
 use \Hcode\PageAdmin;
+use \Hcode\Page;
 use \Hcode\Model\User;
 use \Hcode\Model\Category;
 
@@ -51,3 +52,11 @@ $app->get("/admin/logout", function() {
 
 
 
+$app->get("/categories/:idcategory", function(){
+
+     $page = new Page();
+     $page->setTpl("category", [
+        
+        "post"=>""
+     ]);
+});

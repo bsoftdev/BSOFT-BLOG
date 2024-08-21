@@ -3,6 +3,7 @@
 use \Hcode\Page;
 use \Hcode\Model\User;
 use \Hcode\Model\Post;
+use \Hcode\Model\Comment;
 
 
 $app->get('/', function() {
@@ -13,12 +14,37 @@ $app->get('/', function() {
 
 	  	"posts"=>Post::recentPosts(),
 	  	"featured"=>Post::featured(),
-
+	  	"asidePost"=>Post::asidePost(),
+	  	"recentPostsColum2"=>Post::recentPostsColum2(),
 	  ]
 	);
 
 });
 
+#DISPLAYING ALL POST COMMENTS
+
+
+#ROUTE TO INSERT COMMENTS
+$app->post("/post/comments/:idpost", function($idpost){
+    
+     $post = new Post();
+     $post->get((int)$idpost);
+
+     $user = User::getFromSession();
+     $user->get((int)$user->getiduser());
+
+     $comment = new Comment();
+     $comment->setData([
+     	 "content"=>$_POST['content'],
+     	 "iduser"=>$user->getiduser(),
+     	 "idpost"=>$post->getidpost()
+     ]);
+
+     $comment->save();
+     header("Location:/posts/".$post->geturl());	
+     exit;
+
+});
 
 
 #LOGIN ROUTE PAGE
@@ -95,27 +121,16 @@ $app->post("/register", function(){
 
 $app->post("/login", function(){
 
-	if (!isset($_POST['phone']) || $_POST['phone'] === "") {
-				User::setError("Credenciais incorrectos.");
-				header("Location: /login");
-				exit;
-			}
-
-			if (!isset($_POST['senha']) || $_POST['senha'] ==="") {
-				User::setError("Credenciais incorrectos.");
-				header("Location: /login");
-				exit;
-			}
-
-
 	try {
 
 	    User::login($_POST["phone"], $_POST['senha']);
+	    header("Location:/");
+	    exit;
 		
 	} catch (Exception $e) {
 		User::setError($e->getMessage());
+	  header("Location:/login");
 	}
-	header("Location:/");
 	exit;
 
 });
@@ -136,10 +151,13 @@ $app->get("/posts/:url", function($url){
    
    $post = new Post();
    $post->getlink($url);
+
+
    $page = new Page();
    $page->setTpl("single_post", [
 
-    "post"=>$post->getData(),
-     "posts"=>Post::recentPosts()
+      "post"=>$post->getData(),
+      "posts"=>Post::recentPosts(),
+      "comments"=>Comment::listAll($post->getidpost())
    ]);
 });

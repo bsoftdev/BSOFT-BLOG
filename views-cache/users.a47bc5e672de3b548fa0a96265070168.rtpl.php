@@ -9,13 +9,12 @@
           <div class="btn-group me-2">
              <a href="/admin/users/create" class="btn btn-primary btn-sm"> <i class="bi bi-person-fill-add"></i>Cadastrar Usuario</a>
           </div>
-          <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle d-flex align-items-center gap-1">
-            <svg class="bi"><use xlink:href="#calendar3"/></svg>
-            This week
-          </button>
+         <form class="d-flex" role="search" action="/admin/users">
+            <input class="form-control me-2" name="search" type="search" placeholder="Pesquisar" aria-label="Search" autofocus value="<?php echo htmlspecialchars( $search, ENT_COMPAT, 'UTF-8', FALSE ); ?>">
+            <button class="btn btn-success" type="submit">Pesquisar</button>
+          </form>
         </div>
       </div>
-
 
      <div class="mt-4 w-100">
              
@@ -50,13 +49,29 @@
                  </table>
 
 
-               </div>
-             
+               </div>    
           </div>
+
+          <!---------PAGINATION------------------>
+           <nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-center">
+              <li class="page-item disabled">
+                <a class="page-link"><i class="bi bi-chevron-left"></i></a>
+              </li>
+             
+             <?php $counter1=-1;  if( isset($pages) && ( is_array($pages) || $pages instanceof Traversable ) && sizeof($pages) ) foreach( $pages as $key1 => $value1 ){ $counter1++; ?>
+              <li class="page-item"><a class="page-link " href="<?php echo htmlspecialchars( $value1["href"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"><?php echo htmlspecialchars( $value1["text"], ENT_COMPAT, 'UTF-8', FALSE ); ?></a></li>
+             <?php } ?>
+              <li class="page-item">
+                <a class="page-link" href="#"> <i class="bi bi-chevron-right"></i> </a>
+              </li>
+            </ul>
+          </nav>
      
-
-
-
     </main>
-  </div>
+  </div>     
 </div>
+
+</div>
+
+

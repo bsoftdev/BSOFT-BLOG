@@ -12,11 +12,35 @@ $app->get("/admin/posts", function(){
 
    User::verifyLogin();
 
-	$page = new PageAdmin();
-	$page->setTpl("posts",[
-       
-       "posts" => Post::listAll()
-	]);
+	 $search = (isset($_GET['search']))?$_GET['search']:"";
+    $page = (isset($_GET['page']))? (int)$_GET['page']:1;
+
+    if ($search != '') {
+
+        $pagination = Post::getPageSearch($search, $page);
+    }else{
+
+       $pagination = Post::getPage($page);
+    }
+     $pages = [];
+
+          for ($i=0; $i < $pagination['pages']; $i++){ 
+
+              array_push($pages, [
+                    'href'=>'/admin/posts?'.http_build_query([
+                        'page'=>$i+1,
+                        'search'=>$search
+                    ]),
+
+                    'text'=>$i+1
+              ]);
+          }
+    $page = new PageAdmin();
+    $page->setTpl("posts",[ 
+      "posts"=>$pagination['data'],
+        "search"=>$search,
+        "pages"=>$pages
+    ]);
 });
 
 #CREATING POST TEMPLATE

@@ -13,7 +13,7 @@
       public static function listAll(){
 
          $sql = new Sql();
-         return $sql->select("SELECT * FROM posts INNER JOIN users USING(iduser) ORDER BY idpost DESC");
+         return $sql->select("SELECT posts.*, users.iduser users.name FROM posts INNER JOIN users USING(iduser) ORDER BY idpost DESC");
 
       }
 
@@ -21,7 +21,7 @@
       public static function featured(){
 
          $sql = new Sql();
-         return $sql->select("SELECT * FROM posts INNER JOIN users USING(iduser) ORDER BY idpost ASC LIMIT 3");
+         return $sql->select("SELECT posts.*, users.iduser, users.name FROM posts INNER JOIN users USING(iduser) ORDER BY idpost ASC LIMIT 3");
 
       }
 
@@ -29,9 +29,27 @@
        public static function recentPosts(){
 
          $sql = new Sql();
-         return $sql->select("SELECT * FROM posts INNER JOIN users USING(iduser) ORDER BY idpost DESC LIMIT 4");
+         return $sql->select("SELECT posts.*, users.iduser, users.name FROM posts INNER JOIN users USING(iduser) ORDER BY idpost DESC LIMIT 3");
 
       }
+
+        #RECENT POSTS column 2
+       public static function recentPostsColum2(){
+
+         $sql = new Sql();
+         return $sql->select("SELECT posts.*, users.iduser, users.name FROM posts INNER JOIN users USING(iduser) ORDER BY idpost DESC LIMIT 3 OFFSET 3");
+
+      }
+
+      #RECENT POSTS
+       public static function asidePost(){
+
+         $sql = new Sql();
+         $aside = $sql->select("SELECT posts.*, users.iduser, users.name FROM posts INNER JOIN users USING(iduser) ORDER BY idpost DESC LIMIT 1");
+         return $aside[0];
+
+      }
+
 
       #METHOD FOR CREATING CATEGORIES
       public function save(){
@@ -54,9 +72,7 @@
          }
       }
 
-
-
-      #GETTING THE DATA OF A SPECIFIC  ID POST
+    #GETTING THE DATA OF A SPECIFIC  ID POST
      public function get($idpost){
 
         $sql = new Sql();
@@ -73,13 +89,12 @@
         
      }
 
-
-      #GETTING THE DATA OF A SPECIFIC  POST BY URL
+    #GETTING THE DATA OF A SPECIFIC  POST BY URL
      public function getlink($url){
 
         $sql = new Sql();
 
-        $results = $sql->select("SELECT * FROM posts INNER JOIN users USING(iduser) WHERE url =:url", [
+        $results = $sql->select("SELECT posts.*, users.iduser,users.name FROM posts INNER JOIN users USING(iduser) WHERE url =:url", [
 
             ":url"=>$url
         ]);
@@ -91,107 +106,30 @@
         
      }
 
-
-
      #DELETING THE CATEGORY
      public function delete(){
 
         $sql = new Sql();
 
-        $sql->query("DELETE FROM posts WHERE idpost =:idpost", [
+        $sql->query("CALL deletePost(:idpost)", [
 
             ":idpost"=>$this->getidpost()
         ]);
-
-      
      }
 
 
-
-     #METHOD TO GET THE PRODUCTS RELATED TO A SPECIFIC CATEGORY, E THOSE THAT ARE NOT.
-     public function getProducts($related = true){
-
-      $sql = new Sql();
-
-      if ($related === true) {
-
-           return $sql->select("
-                  SELECT * 
-                        FROM tb_products 
-                        WHERE idproduct IN(
-                        SELECT a.idproduct 
-                        FROM  tb_products a 
-                        INNER JOIN tb_productscategories b 
-                        ON a.idproduct = b.idproduct
-                        WHERE b.idcategory =:idcategory
-                     );", [
-                           ":idcategory"=>$this->getidcategory()
-
-                        ]);
-
-      }else{
-
-         return $sql->select(" 
-                     SELECT * FROM tb_products WHERE idproduct NOT IN(
-                        SELECT a.idproduct 
-                        FROM tb_products a 
-                        INNER JOIN tb_productscategories b 
-                        ON a.idproduct = b.idproduct
-                        WHERE b.idcategory =:idcategory
-                        );",[
-                           ":idcategory"=>$this->getidcategory()
-                     ]);
-       }
-
-     }
-
-
-
- #METHOD FOR PRODUCTS PAGINATION
-public function getProductsPage($page = 1, $itemsPerPage = 8){
+#METHOD FOR POSTS PAGINATION
+public static function getPage($page = 1, $itemsPerPage = 6){
   
       $start = ($page - 1) * $itemsPerPage;
 
      $sql = new Sql();
 
      $results = $sql->select("
-            SELECT  SQL_CALC_FOUND_ROWS * 
-            FROM tb_products a 
-            INNER JOIN tb_productscategories b ON a.idproduct = b.idproduct
-            INNER JOIN tb_categories c ON c.idcategory = b.idcategory
-            WHERE b.idcategory =:idcategory
-            LIMIT $start,$itemsPerPage;
-
-           ", [
-
-              ':idcategory'=>$this->getidcategory()
-           ]);
-    
-
-         #GETTING THE TOTAL NUMBER OF THE CATEGORY
-        $resultsTotal = $sql->select("SELECT FOUND_ROWS() AS nrtotal;");
-
-        return [
-            "data" =>Product::checkList($results),
-            "total"=>(int)$resultsTotal[0]["nrtotal"],
-            "pages" =>ceil($resultsTotal[0]["nrtotal"] / $itemsPerPage)
-
-        ];
-     }
-
-
-
-#METHOD FOR CATEGORY PAGINATION
-public static function getPage($page = 1, $itemsPerPage = 10){
-  
-      $start = ($page - 1) * $itemsPerPage;
-
-     $sql = new Sql();
-
-     $results = $sql->select("
-            SELECT  SQL_CALC_FOUND_ROWS * 
-            FROM tb_categories 
-            ORDER BY descategory
+            SELECT  SQL_CALC_FOUND_ROWS * , posts.*, users.iduser, users.name
+            FROM posts 
+            INNER JOIN users USING(iduser)
+            ORDER BY posts.idpost DESC
             LIMIT $start,$itemsPerPage;");
     
 
@@ -207,7 +145,7 @@ public static function getPage($page = 1, $itemsPerPage = 10){
      }
 
 
-#METHOD FOR CATEGORY SEARCHING
+#METHOD FOR POST SEARCHING
 public static function getPageSearch($search, $page = 1, $itemsPerPage = 10){
   
       $start = ($page - 1) * $itemsPerPage;
@@ -215,10 +153,11 @@ public static function getPageSearch($search, $page = 1, $itemsPerPage = 10){
      $sql = new Sql();
 
      $results = $sql->select("
-            SELECT  SQL_CALC_FOUND_ROWS * 
-            FROM tb_categories
-            WHERE descategory LIKE :search 
-            ORDER BY descategory
+            SELECT  SQL_CALC_FOUND_ROWS * , posts.*, users.name
+            FROM posts
+            INNER JOIN users USING(iduser)
+            WHERE posts.title LIKE :search OR posts.url LIKE :search OR posts.dtregister LIKE :search
+            ORDER BY posts.idpost DESC
             LIMIT $start,$itemsPerPage;", [
                 ':search'=>'%'.$search.'%'
             ]);
@@ -234,8 +173,6 @@ public static function getPageSearch($search, $page = 1, $itemsPerPage = 10){
 
         ];
      }
-
-
 
 
 
